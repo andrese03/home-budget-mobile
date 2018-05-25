@@ -3,14 +3,25 @@ import { View, Text, Button, StyleSheet } from "react-native";
 import Icon from 'react-native-vector-icons/Feather';
 
 class CreateExpenseScreen extends Component {
+  
+  static navigationOptions = {
+    title: 'Create Expense',
+  };
+
   state = {}
   render() {
+    
+    /* 2. Get the param, provide a fallback value if not available */
+    const { navigation } = this.props;
+    const expenseId = navigation.getParam('expenseId', null);
+    const userId = navigation.getParam('userId', null);
+
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> Create Expense <Icon name="heart" /> </Text>
+        <Text style={styles.text}> Create Expense {`${expenseId} - ${userId}`} <Icon name="heart" /> </Text>
         <Button
           title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Details')}
+          onPress={() => this.props.navigation.push('CreateExpense')}
         />
         <Button
           title="Go to Home"
